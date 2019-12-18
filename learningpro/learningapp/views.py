@@ -4,7 +4,7 @@ from django.shortcuts import render
 
 def home(request):
 	print("sds")
-	return render(request, 'home.html')
+	return render(request, 'login.html')
 
 def login1(request):
 	print("heelosdaf")

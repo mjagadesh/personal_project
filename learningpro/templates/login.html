@@ -1,10 +1,38 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+    <meta charset="utf-8">
+  <meta name="robots" content="index, follow">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <title>Login</title>
+  <link rel="stylesheet" href='{% static "js/spectre.min.css" %}'>
+  <link rel="stylesheet" href='{% static "js/spectre-icons.min.css" %}'>
+  
 </head>
 <body>
 <h5>How are you?</h5>
+<form style="margin-left:50px">
+	<div>
+		<div>
+			<input type="text" name="username">
+		</div>
+		<div>
+			<input type="password" name="password">
+		</div>
+		<div>
+			<input type="button" id="loginOkButton" name="submit" value="Login">
+		</div>
+	</div>
+	
+</form>
+<script src='{% static "jquery-3.3.1.min.js" %}' ></script>
+<script>
+	
+	 $('#loginOkButton').click(function() {
+		alert("hi")
+	}
+
+</script>
 </body>
 </html>
