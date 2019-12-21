@@ -1,38 +1,79 @@
 {% load static %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="utf-8">
-  <meta name="robots" content="index, follow">
-  <meta http-equiv="x-ua-compatible" content="ie=edge">
-  <title>Login</title>
-  <link rel="stylesheet" href='{% static "js/spectre.min.css" %}'>
-  <link rel="stylesheet" href='{% static "js/spectre-icons.min.css" %}'>
-  
+<html>
+ <head>
+<!-- <script src="jquery-3.4.1.min.js"></script> -->
+<link rel="stylesheet" href='{% static "css/login.css" %}'>
+<script src="https://code.jquery.com/jquery-latest.min.js"></script>
+<script src='{% static "js/jquery-3.3.1.min.js" %}' ></script>
 </head>
-<body>
-<h5>How are you?</h5>
-<form style="margin-left:50px">
-	<div>
-		<div>
-			<input type="text" name="username">
-		</div>
-		<div>
-			<input type="password" name="password">
-		</div>
-		<div>
-			<input type="button" id="loginOkButton" name="submit" value="Login">
-		</div>
-	</div>
-	
-</form>
-<script src='{% static "jquery-3.3.1.min.js" %}' ></script>
-<script>
-	
-	 $('#loginOkButton').click(function() {
-		alert("hi")
-	}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.slim.min.map"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.map"></script>
 
+<body>
+<div class="login-page">
+  <div class="form">
+    <form class="register-form">
+      <input type="text" placeholder="name"/>
+		<input type="text" placeholder="email address"/>
+     	 <input type="password" placeholder="password"/>
+      	<input type="password" placeholder="confirm password"/>
+
+      <button onclick="createAccount()">create</button>
+      <p class="message">Already registered? <a href="#">Sign In</a></p>
+    </form>
+    <form class="login-form">
+      <input type="text" id="username" placeholder="email id"/>
+      <input type="password" id="password" placeholder="password"/>
+      <button class="buttonload" onclick="createAccount()"><i class="fa fa-spinner fa-spin"></i>Login</button>
+      <p class="message">Not registered? <a href="#">Create an account</a></p>
+    </form>
+  </div>
+</div>
+<script type="text/javascript">
+  $('.message a').click(function(){
+   $('form').animate({height: "toggle", opacity: "toggle"}, "slow");
+});
+
+function createAccount(){
+console.log("jagadeshsdd")
+
+console.log("jagadeshsdd")
+      var g_urls = {
+            'login': '{% url "rest_login" %}'
+        };
+        var username = $('#username').val();
+        var password = $('#password').val();
+        var g_csrftoken = "rKa5I3xxFjHRMsKTB19OOsiSdwSsTyTyeACzjcz8bGjWMKpT9PxTxKVBmNtUJyHO";
+
+
+        console.log("username",username)
+        console.log("password",password)
+        console.log("g_csrftoken",g_csrftoken)
+        $.ajax({
+                url: g_urls.login,
+                method: "POST",
+                data: {
+                    username: username,
+                    password: password,
+                    csrfmiddlewaretoken: g_csrftoken
+                }
+            }).done(function(data) {
+                console.log("DONE: ", data.key);
+                g_auth = {
+                    username: username,
+                    key: data.key,
+                    remember_me: remember_me
+                };
+  alert("jagadesh")
+<!--                g_csrftoken = getCookie('csrftoken');-->
+            }).fail(function(data) {
+                console.log("FAIL", data);
+                alert("jagadesh")
+
+            });
+}
 </script>
 </body>
 </html>
